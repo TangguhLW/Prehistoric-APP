@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRADUNIA 2026 — Ensiklopedia Makhluk Prasejarah</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --stone: #1a1208;
+  --earth: #2d1e0a;
+  --amber: #c8892a;
+  --gold: #e6b84a;
+  --bone: #d4c5a0;
+  --fog: #8a7a5a;
+  --lava: #c04020;
+  --moss: #4a6e2a;
+  --sky-deep: #0a1520;
+  --jungle: #0d1f0a;
+  --cream: #f0e8d0;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--stone);
+  color: var(--bone);
+  font-family: 'Lora', serif;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:#0a0804; }
+::-webkit-scrollbar-thumb { background:var(--amber); border-radius:3px; }
+
+/* PARTICLES */
+#particles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
+.particle { position:absolute; background:var(--gold); border-radius:50%; animation:floatUp linear infinite; opacity:0; }
+@keyframes floatUp {
+  0% { transform:translateY(100vh) rotate(0deg); opacity:0; }
+  10% { opacity:0.5; } 90% { opacity:0.1; }
+  100% { transform:translateY(-5vh) rotate(720deg); opacity:0; }
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  background:rgba(8,5,2,0.97);
+  padding:16px 56px;
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:1px solid rgba(200,137,42,0.15);
+  backdrop-filter:blur(10px);
+}
+.nav-logo { font-family:'Cinzel Decorative',cursive; font-size:1.5rem; color:var(--gold); letter-spacing:4px; text-shadow:0 0 20px rgba(230,184,74,0.4); }
+.nav-logo span { color:var(--lava); }
+.nav-year { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:3px; color:var(--amber); display:block; margin-top:2px; }
+nav ul { list-style:none; display:flex; gap:32px; align-items:center; }
+nav ul li a {
+  font-family:'Cinzel',serif; font-size:0.72rem; color:var(--bone);
+  text-decoration:none; letter-spacing:2px; text-transform:uppercase;
+  transition:color 0.3s; position:relative; padding-bottom:4px;
+}
+nav ul li a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s; }
+nav ul li a:hover,nav ul li a.active { color:var(--gold); }
+nav ul li a:hover::after,nav ul li a.active::after { width:100%; }
+.nav-toggle { display:none; background:none; border:1px solid var(--amber); color:var(--amber); padding:6px 12px; cursor:pointer; font-size:1rem; }
+
+/* HERO */
+#hero {
+  min-height:100vh; position:relative; display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  background:radial-gradient(ellipse at 50% 100%, #1e3a10 0%, #0a0802 55%, #050302 100%);
+}
+.hero-scene { position:absolute; inset:0; overflow:hidden; }
+.hero-mist {
+  position:absolute; bottom:0; left:0; right:0; height:40%;
+  background:linear-gradient(0deg, rgba(20,50,10,0.4) 0%, transparent 100%);
+}
+.hero-glow { position:absolute; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle, rgba(200,137,42,0.06), transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); animation:glow-pulse 5s ease-in-out infinite; }
+@keyframes glow-pulse { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.2)} }
+
+/* SVG dino silhouettes in hero */
+.hero-dino { position:absolute; bottom:0; opacity:0.12; }
+.hero-dino.trex { left:2%; animation:dino-breathe 7s ease-in-out infinite; }
+.hero-dino.brach { right:-2%; animation:dino-breathe 9s ease-in-out infinite 1s; transform:scaleX(-1); }
+.hero-dino.ptero { top:15%; left:40%; opacity:0.08; animation:ptero-fly 20s linear infinite; }
+@keyframes dino-breathe { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+@keyframes dino-breathe-r { 0%,100%{transform:scaleX(-1) translateY(0)} 50%{transform:scaleX(-1) translateY(-18px)} }
+@keyframes ptero-fly { 0%{transform:translateX(0) translateY(0) scale(0.8)} 50%{transform:translateX(60px) translateY(-30px) scale(1)} 100%{transform:translateX(0) translateY(0) scale(0.8)} }
+.hero-dino.brach { animation:dino-breathe-r 9s ease-in-out infinite 1s; }
+
+.hero-content { position:relative; z-index:2; text-align:center; padding:140px 24px 80px; }
+.hero-badge { display:inline-block; font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:6px; color:var(--amber); border:1px solid rgba(200,137,42,0.4); padding:6px 20px; margin-bottom:28px; opacity:0; animation:fadeUp 1s 0.2s forwards; }
+.hero-title { font-family:'Cinzel Decorative',cursive; font-size:clamp(3.2rem,11vw,8rem); line-height:0.9; color:var(--gold); text-shadow:0 0 80px rgba(230,184,74,0.25); opacity:0; animation:fadeUp 1s 0.4s forwards; }
+.hero-sub { font-family:'Cinzel Decorative',cursive; font-size:clamp(0.9rem,2.5vw,1.4rem); color:var(--lava); letter-spacing:4px; margin-top:12px; display:block; opacity:0; animation:fadeUp 1s 0.6s forwards; }
+.hero-desc { font-size:clamp(0.9rem,2vw,1.15rem); color:var(--fog); max-width:580px; margin:28px auto 0; line-height:1.9; font-style:italic; opacity:0; animation:fadeUp 1s 0.8s forwards; }
+.hero-stats { display:flex; justify-content:center; gap:48px; margin-top:48px; flex-wrap:wrap; opacity:0; animation:fadeUp 1s 1s forwards; }
+.h-stat { text-align:center; }
+.h-stat-num { font-family:'Cinzel Decorative',cursive; font-size:2rem; color:var(--gold); display:block; }
+.h-stat-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:3px; color:var(--fog); text-transform:uppercase; }
+.hero-cta { margin-top:48px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; opacity:0; animation:fadeUp 1s 1.2s forwards; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* BUTTONS */
+.btn { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; padding:13px 32px; border:1px solid var(--amber); background:transparent; color:var(--gold); text-decoration:none; cursor:pointer; transition:all 0.3s; position:relative; overflow:hidden; }
+.btn::before { content:''; position:absolute; inset:0; background:var(--amber); transform:translateX(-101%); transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); z-index:-1; }
+.btn:hover { color:var(--stone); } .btn:hover::before { transform:translateX(0); }
+.btn-lava { border-color:var(--lava); color:#ff8060; }
+.btn-lava::before { background:var(--lava); }
+.btn-lava:hover { color:white; }
+.btn-moss { border-color:var(--moss); color:#8ac85a; }
+.btn-moss::before { background:var(--moss); }
+.btn-moss:hover { color:white; }
+
+/* DIVIDER */
+.section-divider { height:2px; background:linear-gradient(90deg,transparent,var(--lava),var(--amber),var(--lava),transparent); position:relative; margin:0; }
+.section-divider::after { content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:var(--gold); font-size:1rem; background:var(--stone); padding:0 12px; animation:spin-slow 12s linear infinite; }
+@keyframes spin-slow { to{transform:translate(-50%,-50%) rotate(360deg)} }
+
+/* SECTION BASE */
+section { position:relative; z-index:1; padding:90px 0; }
+.container { max-width:1280px; margin:0 auto; padding:0 48px; }
+
+.section-header { text-align:center; margin-bottom:56px; }
+.section-tag { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:7px; color:var(--amber); text-transform:uppercase; display:block; margin-bottom:14px; }
+.section-title { font-family:'Cinzel Decorative',cursive; font-size:clamp(1.8rem,5vw,3.2rem); color:var(--gold); text-shadow:0 0 40px rgba(230,184,74,0.15); }
+.section-desc { font-size:0.95rem; color:var(--fog); max-width:600px; margin:16px auto 0; line-height:1.8; font-style:italic; }
+.section-line { width:80px; height:2px; background:linear-gradient(90deg,transparent,var(--amber),transparent); margin:20px auto 0; }
+
+/* FILTER BAR */
+.filter-bar {
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+  margin-bottom:48px; padding:24px 32px;
+  background:rgba(200,137,42,0.04);
+  border:1px solid rgba(200,137,42,0.12);
+  border-radius:2px;
+}
+.filter-btn {
+  font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase;
+  padding:8px 20px; border:1px solid rgba(200,137,42,0.25); background:transparent;
+  color:var(--fog); cursor:pointer; transition:all 0.3s; border-radius:1px;
+}
+.filter-btn:hover { border-color:var(--amber); color:var(--amber); }
+.filter-btn.active { background:var(--amber); border-color:var(--amber); color:var(--stone); }
+.filter-btn.carnivore.active { background:var(--lava); border-color:var(--lava); color:white; }
+.filter-btn.herbivore.active { background:var(--moss); border-color:var(--moss); color:white; }
+.filter-btn.omnivore.active { background:#8060a0; border-color:#8060a0; color:white; }
+.filter-btn.piscivore.active { background:#206080; border-color:#206080; color:white; }
+.filter-count { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:3px; color:var(--fog); text-align:center; margin-bottom:24px; }
+.filter-count span { color:var(--gold); font-size:0.8rem; }
+
+/* SEARCH */
+.search-wrap { margin-bottom:32px; display:flex; justify-content:center; }
+.search-input {
+  font-family:'Lora',serif; font-size:0.9rem; padding:12px 24px; width:380px;
+  background:rgba(200,137,42,0.05); border:1px solid rgba(200,137,42,0.2);
+  color:var(--bone); outline:none; transition:border-color 0.3s;
+  border-radius:0;
+}
+.search-input::placeholder { color:var(--fog); font-style:italic; }
+.search-input:focus { border-color:var(--amber); }
+
+/* GRID */
+.dino-grid, .plant-grid { display:grid; gap:28px; }
+.dino-grid { grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.plant-grid { grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); }
+
+/* CARD */
+.card {
+  background:linear-gradient(145deg,rgba(30,20,8,0.95),rgba(18,12,4,0.98));
+  border:1px solid rgba(200,137,42,0.18);
+  overflow:hidden; cursor:pointer;
+  transition:transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s, border-color 0.4s, opacity 0.4s;
+  position:relative;
+}
+.card.hidden { display:none; }
+.card:hover { transform:translateY(-8px) scale(1.01); border-color:var(--amber); box-shadow:0 28px 70px rgba(0,0,0,0.65), 0 0 35px rgba(200,137,42,0.12); }
+.card-img-wrap { position:relative; overflow:hidden; height:210px; }
+.card-img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s, filter 0.4s; filter:sepia(25%) saturate(0.85); display:block; }
+.card:hover .card-img { transform:scale(1.06); filter:sepia(10%) saturate(1); }
+.card-img-overlay { position:absolute; inset:0; background:linear-gradient(0deg,rgba(18,12,4,0.7) 0%,transparent 50%); }
+.card-era-badge { position:absolute; top:12px; left:12px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:2px; background:rgba(8,5,2,0.85); border:1px solid rgba(200,137,42,0.4); padding:4px 10px; color:var(--amber); text-transform:uppercase; }
+.diet-tag { position:absolute; top:12px; right:12px; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:1px; padding:4px 10px; text-transform:uppercase; }
+.diet-carnivore { background:rgba(192,64,32,0.85); color:#ffb090; }
+.diet-herbivore { background:rgba(60,100,30,0.85); color:#a0e060; }
+.diet-omnivore { background:rgba(100,60,140,0.85); color:#d0a0ff; }
+.diet-piscivore { background:rgba(20,80,120,0.85); color:#80d0ff; }
+.diet-insectivore { background:rgba(120,90,20,0.85); color:#ffd080; }
+.diet-plant { background:rgba(30,80,20,0.85); color:#90e050; }
+.card-body { padding:24px; }
+.card-name { font-family:'Cinzel Decorative',cursive; font-size:1.25rem; color:var(--gold); margin-bottom:4px; line-height:1.2; }
+.card-latin { font-size:0.78rem; font-style:italic; color:var(--fog); margin-bottom:12px; }
+.card-desc { font-size:0.85rem; line-height:1.8; color:var(--bone); margin-bottom:16px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.card-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; border-top:1px solid rgba(200,137,42,0.15); padding-top:14px; }
+.stat-item { font-size:0.75rem; }
+.stat-label { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:2px; color:var(--amber); text-transform:uppercase; display:block; margin-bottom:2px; }
+.stat-val { color:var(--cream); }
+.card-more { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:2px; color:var(--amber); text-align:right; margin-top:12px; display:flex; align-items:center; justify-content:flex-end; gap:6px; opacity:0.7; transition:opacity 0.2s; }
+.card:hover .card-more { opacity:1; }
+
+/* NO RESULTS */
+.no-results { text-align:center; padding:60px; color:var(--fog); font-style:italic; display:none; }
+.no-results.show { display:block; }
+
+/* TIMELINE ERA */
+#era { background:linear-gradient(180deg, var(--stone) 0%, #0a1020 100%); }
+.timeline { max-width:900px; margin:0 auto; position:relative; padding-left:56px; }
+.timeline::before { content:''; position:absolute; left:18px; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--lava),var(--amber),var(--moss)); }
+.tl-item { position:relative; margin-bottom:52px; opacity:0; transform:translateX(30px); transition:opacity 0.6s, transform 0.6s; }
+.tl-item.visible { opacity:1; transform:translateX(0); }
+.tl-dot { position:absolute; left:-46px; top:8px; width:16px; height:16px; border-radius:50%; border:2px solid var(--amber); background:var(--stone); box-shadow:0 0 14px rgba(230,184,74,0.5); }
+.tl-dot::after { content:''; position:absolute; inset:3px; border-radius:50%; background:var(--amber); animation:dot-pulse 3s ease-in-out infinite; }
+@keyframes dot-pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+.tl-period { font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:4px; color:var(--lava); text-transform:uppercase; margin-bottom:6px; }
+.tl-name { font-family:'Cinzel Decorative',cursive; font-size:1.6rem; color:var(--gold); margin-bottom:14px; }
+.tl-desc { font-size:0.92rem; line-height:1.9; color:var(--bone); max-width:720px; }
+.tl-highlight { background:rgba(200,137,42,0.08); border-left:2px solid var(--amber); padding:14px 20px; margin-top:14px; font-style:italic; color:var(--bone); font-size:0.85rem; line-height:1.8; }
+
+/* PLANTS */
+#tumbuhan { background:radial-gradient(ellipse at 50% 0%, #0f2008, #050e04 60%, var(--stone) 100%); }
+.plant-card { background:linear-gradient(145deg,rgba(8,18,6,0.97),rgba(12,22,8,0.98)); border-color:rgba(74,110,42,0.25); }
+.plant-card:hover { border-color:#6a9a3a; box-shadow:0 28px 70px rgba(0,0,0,0.65), 0 0 35px rgba(74,110,42,0.12); }
+.plant-card .card-name { color:#a0d060; }
+.plant-card .stat-label { color:#7ab84a; }
+
+/* ABOUT */
+#about { background:radial-gradient(ellipse at center, #100c06, #050302); }
+.about-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:start; }
+.about-visual { position:sticky; top:100px; }
+.about-orb { width:300px; height:300px; border-radius:50%; border:1px solid rgba(200,137,42,0.4); margin:0 auto; display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 0 80px rgba(200,137,42,0.1); animation:orb-glow 5s ease-in-out infinite; }
+@keyframes orb-glow { 0%,100%{box-shadow:0 0 80px rgba(200,137,42,0.1)} 50%{box-shadow:0 0 120px rgba(200,137,42,0.22)} }
+.about-orb::before,.about-orb::after { content:''; position:absolute; border-radius:50%; border:1px solid rgba(200,137,42,0.15); animation:orbit 15s linear infinite; }
+.about-orb::before { inset:-30px; }
+.about-orb::after { inset:-60px; animation-duration:25s; animation-direction:reverse; }
+@keyframes orbit { to{transform:rotate(360deg)} }
+.orb-img { width:180px; height:180px; object-fit:cover; border-radius:50%; filter:sepia(30%); }
+.about-deco { text-align:center; margin-top:24px; }
+.about-deco-text { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--fog); text-transform:uppercase; }
+.about-text h2 { font-family:'Cinzel Decorative',cursive; font-size:2.2rem; color:var(--gold); margin-bottom:24px; line-height:1.2; }
+.about-text p { font-size:0.95rem; line-height:1.95; color:var(--bone); margin-bottom:20px; }
+.feature-list { margin:28px 0; }
+.feature-item { display:flex; gap:16px; margin-bottom:16px; align-items:flex-start; }
+.feat-icon { color:var(--amber); font-size:1rem; margin-top:2px; flex-shrink:0; }
+.feat-text { font-size:0.88rem; line-height:1.7; color:var(--bone); }
+.feat-text strong { color:var(--gold); font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:1px; }
+.dev-panel { border:1px solid rgba(200,137,42,0.3); padding:32px; margin-top:36px; position:relative; background:rgba(200,137,42,0.03); }
+.dev-panel::before { content:'— DEVELOPER —'; position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:var(--stone); padding:0 16px; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:5px; color:var(--amber); white-space:nowrap; }
+.dev-name { font-family:'Cinzel Decorative',cursive; font-size:2rem; color:var(--gold); margin-bottom:6px; }
+.dev-title { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--amber); text-transform:uppercase; margin-bottom:18px; }
+.dev-bio { font-size:0.88rem; line-height:1.85; color:var(--fog); }
+.dev-stack { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.dev-tag { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:2px; padding:4px 12px; border:1px solid rgba(200,137,42,0.25); color:var(--fog); text-transform:uppercase; }
+
+/* FOOTER */
+footer { background:#030201; border-top:1px solid rgba(200,137,42,0.12); padding:48px; text-align:center; }
+.footer-logo { font-family:'Cinzel Decorative',cursive; font-size:1.8rem; color:var(--gold); margin-bottom:8px; letter-spacing:4px; opacity:0.5; }
+.footer-quote { font-style:italic; color:var(--fog); font-size:0.88rem; margin-bottom:20px; line-height:1.8; }
+.footer-copy { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:3px; color:rgba(138,122,90,0.5); text-transform:uppercase; }
+.footer-copy span { color:var(--amber); }
+
+/* MODAL */
+.modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:900; opacity:0; pointer-events:none; transition:opacity 0.4s; backdrop-filter:blur(12px); padding:20px; display:flex; align-items:center; justify-content:center; }
+.modal-backdrop.open { opacity:1; pointer-events:all; }
+.modal { background:linear-gradient(145deg,#1a1006,#0e0a04); border:1px solid rgba(200,137,42,0.35); max-width:820px; width:100%; max-height:90vh; overflow-y:auto; position:relative; transform:scale(0.92) translateY(20px); transition:transform 0.4s cubic-bezier(0.2,0.8,0.2,1); box-shadow:0 0 100px rgba(200,137,42,0.15); }
+.modal-backdrop.open .modal { transform:scale(1) translateY(0); }
+.modal-close { position:absolute; top:16px; right:18px; background:none; border:1px solid rgba(200,137,42,0.3); color:var(--fog); font-size:1rem; cursor:pointer; transition:all 0.2s; z-index:2; padding:6px 12px; font-family:'Cinzel',serif; }
+.modal-close:hover { border-color:var(--amber); color:var(--gold); }
+.modal-img-wrap { height:320px; overflow:hidden; position:relative; }
+.modal-img { width:100%; height:100%; object-fit:cover; filter:sepia(15%) contrast(1.05); }
+.modal-img-gradient { position:absolute; bottom:0; left:0; right:0; height:60%; background:linear-gradient(0deg,rgba(14,10,4,1) 0%,transparent 100%); }
+.modal-body { padding:36px 40px 40px; }
+.modal-header { margin-bottom:24px; }
+.modal-period { font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:4px; color:var(--lava); text-transform:uppercase; margin-bottom:8px; }
+.modal-name { font-family:'Cinzel Decorative',cursive; font-size:2.2rem; color:var(--gold); margin-bottom:4px; line-height:1.1; }
+.modal-latin { font-style:italic; color:var(--fog); font-size:0.9rem; margin-bottom:14px; }
+.modal-stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; background:rgba(200,137,42,0.04); border:1px solid rgba(200,137,42,0.12); padding:20px 24px; margin:20px 0 28px; }
+.m-stat-label { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:2px; color:var(--amber); text-transform:uppercase; display:block; margin-bottom:4px; }
+.m-stat-val { font-size:0.88rem; color:var(--cream); }
+.modal-section-title { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:4px; color:var(--amber); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:12px; }
+.modal-section-title::after { content:''; flex:1; height:1px; background:rgba(200,137,42,0.15); }
+.modal-section-text { font-size:0.92rem; line-height:1.95; color:var(--bone); margin-bottom:24px; }
+.modal-fact-box { background:rgba(200,137,42,0.05); border-left:2px solid var(--amber); padding:16px 20px; margin-bottom:20px; font-size:0.88rem; line-height:1.85; color:var(--bone); font-style:italic; }
+.modal-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+.modal-tag { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:2px; padding:5px 12px; border:1px solid rgba(200,137,42,0.2); color:var(--fog); text-transform:uppercase; }
+
+/* SCROLL REVEAL */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s, transform 0.7s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* BACK TO TOP */
+.back-top { position:fixed; bottom:32px; right:32px; z-index:100; background:rgba(200,137,42,0.15); border:1px solid rgba(200,137,42,0.3); color:var(--amber); font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:2px; padding:10px 14px; cursor:pointer; transition:background 0.3s; opacity:1; pointer-events:all; }
+
+.back-top:hover { background:rgba(200,137,42,0.3); }
+
+/* PROGRESS BAR */
+.progress-bar { position:fixed; top:0; left:0; height:2px; background:linear-gradient(90deg,var(--lava),var(--gold)); z-index:300; transition:width 0.1s; }
+
+@media (max-width:900px) {
+  nav ul { display:none; } nav ul.open { display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(8,5,2,0.98); padding:20px; gap:16px; border-bottom:1px solid rgba(200,137,42,0.2); }
+  .nav-toggle { display:block; }
+  .container { padding:0 24px; }
+  nav { padding:14px 24px; }
+  .about-grid { grid-template-columns:1fr; }
+  .about-visual { position:static; }
+  .modal-stats-grid { grid-template-columns:repeat(2,1fr); }
+  .hero-stats { gap:28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div>
+    <div class="nav-logo">PRADU<span>NIA</span></div>
+    <div class="nav-year">© 2026 — Ensiklopedia Prasejarah</div>
+  </div>
+  <button class="nav-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="18" height="2" rx="1" fill="currentColor"/><rect y="6" width="18" height="2" rx="1" fill="currentColor"/><rect y="12" width="18" height="2" rx="1" fill="currentColor"/></svg></button>
+  <ul>
+    <li><a href="#hero">Beranda</a></li>
+    <li><a href="#dinosaurus">Dinosaurus</a></li>
+    <li><a href="#era">Era Geologi</a></li>
+    <li><a href="#tumbuhan">Tumbuhan Purba</a></li>
+    <li><a href="#about">Tentang</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-scene">
+    <div class="hero-glow"></div>
+    <div class="hero-mist"></div>
+    <!-- T-Rex SVG -->
+    <svg class="hero-dino trex" width="380" height="480" viewBox="0 0 380 480" fill="#c8892a" xmlns="http://www.w3.org/2000/svg">
+      <path d="M240 460 L235 410 L228 360 L240 310 L258 270 L278 230 L292 185 L300 150 L296 118 L282 98 L265 92 L250 98 L240 115 L232 135 L218 148 L200 155 L182 150 L168 138 L158 120 L148 108 L132 102 L116 108 L108 125 L112 148 L124 168 L138 188 L148 215 L152 248 L150 285 L140 320 L120 355 L100 395 L82 440 L82 460 L240 460Z M290 80 L305 65 L320 48 L330 30 L322 12 L305 5 L288 12 L278 30 L274 50 L276 68 L285 80 L290 80Z"/>
+    </svg>
+    <!-- Brachiosaurus SVG -->
+    <svg class="hero-dino brach" width="460" height="500" viewBox="0 0 460 500" fill="#c8892a" xmlns="http://www.w3.org/2000/svg">
+      <path d="M220 480 L228 420 L235 355 L240 285 L244 215 L248 155 L252 100 L256 58 L252 25 L240 8 L225 4 L212 12 L205 30 L202 58 L200 100 L198 155 L196 210 L192 270 L185 330 L174 385 L160 440 L148 480 L220 480Z M110 480 L118 420 L128 368 L140 400 L148 450 L152 480 L110 480Z M278 480 L285 425 L295 375 L308 408 L312 450 L316 480 L278 480Z M320 480 L325 435 L335 395 L345 420 L350 465 L352 480 L320 480Z"/>
+    </svg>
+    <!-- Pterosaur SVG -->
+    <svg class="hero-dino ptero" width="200" height="100" viewBox="0 0 200 100" fill="#c8892a">
+      <path d="M100 50 L0 20 L30 50 L0 80 L100 50 Z M100 50 L200 20 L170 50 L200 80 L100 50 Z M95 40 L105 40 L108 60 L92 60 Z"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge"><svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 3px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> EDISI 2026 — VERSI LENGKAP <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 3px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg></div>
+    <h1 class="hero-title">PRADUNIA</h1>
+    <span class="hero-sub">Ensiklopedia Makhluk Prasejarah</span>
+    <p class="hero-desc">Perjalanan melintasi 500 juta tahun sejarah kehidupan bumi — dari dinosaurus yang mengguncang tanah hingga tumbuhan purba yang menyaksikan kepunahan terbesar sepanjang masa.</p>
+    <div class="hero-stats">
+      <div class="h-stat"><span class="h-stat-num" data-target="18">0</span><span class="h-stat-label">Spesies Dinosaurus</span></div>
+      <div class="h-stat"><span class="h-stat-num" data-target="10">0</span><span class="h-stat-label">Flora Purba</span></div>
+      <div class="h-stat"><span class="h-stat-num" data-target="500">0</span><span class="h-stat-label">Juta Tahun Sejarah</span></div>
+      <div class="h-stat"><span class="h-stat-num" data-target="5">0</span><span class="h-stat-label">Era Geologi</span></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#dinosaurus" class="btn">Jelajahi Dinosaurus</a>
+      <a href="#tumbuhan" class="btn btn-moss">Flora Purba</a>
+      <a href="#era" class="btn btn-lava">Era Geologi</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- DINOSAURUS -->
+<section id="dinosaurus" style="background:var(--earth)">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 3px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> Klasifikasi Hewan Prasejarah <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 3px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg></span>
+      <h2 class="section-title">Ensiklopedia Dinosaurus</h2>
+      <p class="section-desc">Dari predator puncak hingga herbivora raksasa — temukan fakta ilmiah lengkap, pola hidup, dan rahasia kehidupan makhluk menakjubkan ini.</p>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="search-wrap reveal">
+      <input type="text" class="search-input" id="dinoSearch" placeholder="Cari dinosaurus... (nama, era, ukuran)" oninput="filterDinos()">
+    </div>
+
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all" onclick="setDinoFilter('all',this)"><svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> Semua</button>
+      <button class="filter-btn carnivore" data-filter="carnivore" onclick="setDinoFilter('carnivore',this)"><svg width="10" height="10" viewBox="0 0 10 10" fill="#c04020" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><circle cx="5" cy="5" r="5"/></svg> Karnivora</button>
+      <button class="filter-btn herbivore" data-filter="herbivore" onclick="setDinoFilter('herbivore',this)"><svg width="10" height="10" viewBox="0 0 10 10" fill="#4a6e2a" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><circle cx="5" cy="5" r="5"/></svg> Herbivora</button>
+      <button class="filter-btn omnivore" data-filter="omnivore" onclick="setDinoFilter('omnivore',this)"><svg width="10" height="10" viewBox="0 0 10 10" fill="#8060a0" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><circle cx="5" cy="5" r="5"/></svg> Omnivora</button>
+      <button class="filter-btn piscivore" data-filter="piscivore" onclick="setDinoFilter('piscivore',this)"><svg width="10" height="10" viewBox="0 0 10 10" fill="#206080" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><circle cx="5" cy="5" r="5"/></svg> Piscivora</button>
+      <button class="filter-btn" data-filter="triassic" onclick="setDinoFilter('triassic',this)">Era Trias</button>
+      <button class="filter-btn" data-filter="jurassic" onclick="setDinoFilter('jurassic',this)">Era Jura</button>
+      <button class="filter-btn" data-filter="cretaceous" onclick="setDinoFilter('cretaceous',this)">Era Kapur</button>
+      <button class="filter-btn" data-filter="large" onclick="setDinoFilter('large',this)">Raksasa (&gt;10m)</button>
+      <button class="filter-btn" data-filter="small" onclick="setDinoFilter('small',this)">Kecil (&lt;5m)</button>
+      <button class="filter-btn" data-filter="flying" onclick="setDinoFilter('flying',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg> Terbang</button>
+      <button class="filter-btn" data-filter="armored" onclick="setDinoFilter('armored',this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> Berlapis Baja</button>
+    </div>
+
+    <div class="filter-count reveal">Menampilkan <span id="dinoCount">18</span> dari 18 spesies</div>
+
+    <div class="dino-grid" id="dinoGrid"></div>
+    <div class="no-results" id="dinoNoResult">Tidak ada dinosaurus yang cocok dengan filter ini.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ERA GEOLOGI -->
+<section id="era">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> Skala Waktu Geologis Bumi <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg></span>
+      <h2 class="section-title">Era & Periode Prasejarah</h2>
+      <p class="section-desc">Perjalanan 4,6 miliar tahun dalam kronologi lengkap kejadian-kejadian terpenting dalam sejarah kehidupan di Bumi.</p>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TUMBUHAN PURBA -->
+<section id="tumbuhan">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> Flora Prasejarah Bumi <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg></span>
+      <h2 class="section-title">Tumbuhan Purba</h2>
+      <p class="section-desc">Vegetasi kuno yang membentuk ekosistem prasejarah, menjadi sumber makanan dinosaurus, dan beberapa di antaranya masih hidup hingga hari ini.</p>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="search-wrap reveal">
+      <input type="text" class="search-input" id="plantSearch" placeholder="Cari tumbuhan purba..." oninput="filterPlants()">
+    </div>
+
+    <div class="filter-bar reveal" style="border-color:rgba(74,110,42,0.2)">
+      <button class="filter-btn active" data-filter="all" onclick="setPlantFilter('all',this)" style="color:var(--moss)"><svg width="12" height="12" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> Semua</button>
+      <button class="filter-btn" data-filter="tree" onclick="setPlantFilter('tree',this)" style="border-color:rgba(74,110,42,0.3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 2L8 9H5L12 16L9 16L12 22L15 16H12L19 9H16L12 2Z"/></svg> Pohon Purba</button>
+      <button class="filter-btn" data-filter="fern" onclick="setPlantFilter('fern',this)" style="border-color:rgba(74,110,42,0.3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 4-8 4s0-2 4-4c-5 0-8 5-8 5s2-4 6-4c-7 0-9 8-9 8s1-5 5-6Z"/></svg> Pakis & Paku</button>
+      <button class="filter-btn" data-filter="conifer" onclick="setPlantFilter('conifer',this)" style="border-color:rgba(74,110,42,0.3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 2L5 15H9L3 22H21L15 15H19L12 2Z"/></svg> Konifer Purba</button>
+      <button class="filter-btn" data-filter="cycad" onclick="setPlantFilter('cycad',this)" style="border-color:rgba(74,110,42,0.3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M13 2V15.5C14.5 14 17 13.5 20 14.5 18 11 14 10 13 10V8C15 7 18 7.5 20 10 18 6 14.5 5.5 13 6V4C14.5 3 17 3.5 18.5 5.5 17 2.5 13.5 2 13 2ZM11 2C10.5 2 7 2.5 5.5 5.5 7 3.5 9.5 3 11 4V6C9.5 5.5 6 6 4 10 6 7.5 9 7 11 8V10C10 10 6 11 4 14.5 7 13.5 9.5 14 11 15.5V22H13V15.5C14.5 14 17 13.5 20 14.5 18 11 14 10 13 10V2Z"/></svg> Cycad & Ginkgo</button>
+      <button class="filter-btn" data-filter="aquatic" onclick="setPlantFilter('aquatic',this)" style="border-color:rgba(74,110,42,0.3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 2C12 2 4 10 4 15a8 8 0 0 0 16 0C20 10 12 2 12 2Z"/></svg> Akuatik</button>
+      <button class="filter-btn" data-filter="living-fossil" onclick="setPlantFilter('living-fossil',this)" style="border-color:rgba(74,110,42,0.3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="3"/><path d="M12 5V2M12 22v-3M5 12H2M22 12h-3M7.05 7.05 4.93 4.93M19.07 19.07l-2.12-2.12M7.05 16.95l-2.12 2.12M19.07 4.93l-2.12 2.12" stroke="currentColor" stroke-width="2" fill="none"/></svg> Fosil Hidup</button>
+    </div>
+
+    <div class="filter-count reveal" style="color:var(--moss)">Menampilkan <span id="plantCount">10</span> dari 10 flora</div>
+
+    <div class="plant-grid" id="plantGrid"></div>
+    <div class="no-results" id="plantNoResult">Tidak ada tumbuhan yang cocok dengan filter ini.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> Tentang Pradunia 2026 <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg></span>
+      <h2 class="section-title">Tentang Website Ini</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-orb">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Trex_rearview.jpg" alt="T-Rex" class="orb-img" onerror="this.style.display='none'">
+        </div>
+        <div class="about-deco">
+          <div class="about-deco-text" style="margin-top:24px"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><path d="M5 0L10 5L5 10L0 5Z"/></svg> Pradunia — Est. 2026 <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><path d="M5 0L10 5L5 10L0 5Z"/></svg></div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <h2>Portal Ilmu Prasejarah Digital</h2>
+        <p><strong style="color:var(--gold)">PRADUNIA</strong> adalah ensiklopedia digital interaktif pertama di Indonesia yang secara komprehensif mendokumentasikan kehidupan prasejarah bumi — dari makhluk purba, dinosaurus, hingga flora kuno yang membentuk ekosistem jutaan tahun silam.</p>
+        <p>Dibangun pada tahun 2026 dengan standar riset paleontologi terkini, Pradunia menghadirkan data ilmiah akurat yang dikemas dalam pengalaman visual yang imersif dan memukau. Setiap entri dilengkapi dengan deskripsi anatomi, pola perilaku, habitat, dan fakta ilmiah mutakhir.</p>
+        <p>Visi kami sederhana: menjadikan ilmu paleontologi dapat diakses, dipahami, dan dinikmati oleh semua kalangan — dari pelajar hingga peneliti, dari penggemar dinosaurus hingga ilmuwan profesional.</p>
+        <div class="feature-list">
+          <div class="feature-item"><span class="feat-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><path d="M5 0L10 5L5 10L0 5Z"/></svg></span><span class="feat-text"><strong>18 Spesies Dinosaurus</strong> — Deskripsi lengkap dengan anatomi, perilaku, pola makan, dan fakta ilmiah terkini.</span></div>
+          <div class="feature-item"><span class="feat-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><path d="M5 0L10 5L5 10L0 5Z"/></svg></span><span class="feat-text"><strong>10 Flora Prasejarah</strong> — Tumbuhan purba dengan penjelasan evolusi dan kontribusi ekologis.</span></div>
+          <div class="feature-item"><span class="feat-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><path d="M5 0L10 5L5 10L0 5Z"/></svg></span><span class="feat-text"><strong>Sistem Filter Canggih</strong> — Filter berdasarkan diet, era, ukuran, dan karakter khusus.</span></div>
+          <div class="feature-item"><span class="feat-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><path d="M5 0L10 5L5 10L0 5Z"/></svg></span><span class="feat-text"><strong>Timeline Era Geologi</strong> — Kronologi lengkap dari Prakambrium hingga Kenozoikum.</span></div>
+        </div>
+        <div class="dev-panel">
+          <div class="dev-name">Tangguh</div>
+          <div class="dev-title"><svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin:0 4px"><polygon points="5,0 6.18,3.82 10,3.82 6.91,6.18 8.09,10 5,7.64 1.91,10 3.09,6.18 0,3.82 3.82,3.82"/></svg> Kreator & Lead Developer — Pradunia 2026</div>
+          <div class="dev-bio">Tangguh adalah pengembang web kreatif dan penggemar paleontologi yang berdedikasi. Dengan semangat yang mendalam terhadap sejarah alam dan ilmu pengetahuan, ia merancang Pradunia sebagai wujud nyata dari keyakinan bahwa pengetahuan sains harus bisa dinikmati semua orang. Pradunia adalah perpaduan antara kecintaannya pada desain web modern dan rasa ingin tahu tanpa batas tentang kehidupan purba bumi kita.</div>
+          <div class="dev-stack">
+            <span class="dev-tag">HTML5</span><span class="dev-tag">CSS3</span><span class="dev-tag">Vanilla JS</span><span class="dev-tag">Paleontologi</span><span class="dev-tag">UI Design</span><span class="dev-tag">2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PRADUNIA</div>
+  <p class="footer-quote">"Dalam setiap lapisan batu tersimpan kisah jutaan tahun.<br>Bumi adalah buku terbesar yang pernah ditulis oleh waktu."</p>
+  <p class="footer-copy">© 2026 PRADUNIA — Dikembangkan dengan <svg width="12" height="12" viewBox="0 0 24 24" fill="#c04020" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> oleh <span>TANGGUH</span> — Ensiklopedia Makhluk Prasejarah Indonesia</p>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle"><polyline points="18 15 12 9 6 15"/></svg> TOP</button>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> TUTUP</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// ========================
+// DATA DINOSAURUS (18 spesies)
+// ========================
+const dinosaurs = [
+  {
+    id:"trex", name:"Tyrannosaurus Rex", latin:"Tyrannosaurus rex",
+    period:"Kapur Akhir", years:"68–66 Juta Tahun Lalu",
+    diet:"carnivore", dietLabel:"Karnivora", era:"cretaceous", size:"large",
+    length:"12–13 m", weight:"8–14 ton", height:"4 m", region:"Amerika Utara",
+    tags:["Karnivora","Bipedal","Predator Puncak","Berfeather","Kapur"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/9/97/Trex_rearview.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/9/97/Trex_rearview.jpg",
+    desc:"Predator darat terbesar yang pernah hidup. Dengan kekuatan gigitan terkuat dari semua hewan terestrial yang diperkirakan mencapai 57.000 Newton, T. rex mendominasi ekosistem Kapur Akhir Amerika Utara.",
+    anatomy:"Tengkorak massif dengan gigi pisau-berdaging sepanjang 30 cm (termasuk akar). Dua lengan pendek namun berotot kuat. Kaki belakang panjang dan bertenaga dengan tiga jari bercakar. Ekor panjang menyeimbangkan bobot kepala raksasa. Bukti terbaru menunjukkan seluruh tubuh atau sebagian ditutupi proto-bulu.",
+    behavior:"T. rex kemungkinan besar adalah predator oportunistik yang juga mengais bangkai ketika kesempatan ada. Penglihatan binokular tajam memberi persepsi kedalaman sangat baik. Penciuman luar biasa dengan bulbus olfaktorius besar. Remaja lebih ramping dan agresif, baru berubah menjadi pemburu berat seiring dewasa.",
+    habitat:"Dataran banjir subtropis dengan sungai berliku, hutan jarang, dan padang terbuka. Hidup di benua pulau Laramidia, bagian barat Amerika Utara modern.",
+    fact:"Penelitian 2022 menggunakan spektroskopi sinyal lipoksidasi membuktikan T. rex memiliki metabolisme endoterm setara burung modern. Satu spesimen bernama 'Sue' (FMNH PR 2081) adalah kerangka paling lengkap dan besar yang diketahui, disimpan di Field Museum Chicago."
+  },
+  {
+    id:"brach", name:"Brachiosaurus", latin:"Brachiosaurus altithorax",
+    period:"Jura Akhir", years:"154–153 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"jurassic", size:"large",
+    length:"26 m", weight:"56–62 ton", height:"13 m", region:"Amerika Utara, Afrika",
+    tags:["Herbivora","Sauropoda","Raksasa","Empat Kaki","Jura"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/1/18/Brachiosaurus_Revised.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/1/18/Brachiosaurus_Revised.jpg",
+    desc:"Sauropoda dengan kaki depan lebih panjang dari kaki belakang, memungkinkan kepala menjangkau pucuk pohon setinggi 13 meter. Salah satu hewan terestrial terberat yang diketahui.",
+    anatomy:"Leher sangat panjang dengan vertebra berlubang untuk mengurangi bobot. Kaki depan lebih tinggi dari kaki belakang (karenanya nama 'lengan kadal'). Hidung terletak di atas kepala, bukan di ujung moncong. Tulang belakang dan anggota tubuh dirancang untuk menopang bobot masif.",
+    behavior:"Merumput di tingkat kanopi yang tidak dapat dijangkau herbivora lain, menghindari kompetisi langsung. Bermigrasi mengikuti sumber pakan musiman. Individu dewasa membentuk lingkaran protektif di sekitar yang muda. Menelan batu gastrolitik untuk membantu pencernaan vegetasi keras.",
+    habitat:"Dataran bervegetasi lebat Afrika dan Amerika Utara era Jura. Menyukai area terbuka dengan akses ke pohon tinggi dan sumber air berlimpah.",
+    fact:"Jantung Brachiosaurus diperkirakan berbobot sekitar 400 kg untuk memompa darah ke kepala setinggi 13 m. Tekanan darahnya harus ekstrem atau mereka memiliki katup jantung khusus dan sistem vaskular yang berbeda dari hewan modern mana pun."
+  },
+  {
+    id:"veloci", name:"Velociraptor", latin:"Velociraptor mongoliensis",
+    period:"Kapur Akhir", years:"75–71 Juta Tahun Lalu",
+    diet:"carnivore", dietLabel:"Karnivora", era:"cretaceous", size:"small",
+    length:"1.8–2 m", weight:"14–20 kg", height:"0.5 m", region:"Mongolia, Cina",
+    tags:["Karnivora","Berbulu","Cerdas","Kapur","Dromaeosaurid"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/b/b8/Velociraptor_dinoguy2.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/b/b8/Velociraptor_dinoguy2.jpg",
+    desc:"Jauh lebih kecil dari gambaran filmnya — seukuran kalkun besar. Kecerdasan tinggi, kecepatan, dan cakar sabit mematikan menjadikannya predator yang sangat efektif di Mongolia purba.",
+    anatomy:"Tubuh ringan sepenuhnya ditutupi bulu. Cakar sabit besar pada jari kaki kedua (deinonychous claw). Otak relatif besar dibandingkan tubuh. Tangan panjang dengan tiga jari bercakar. Ekor kaku membantu manuver saat berlari.",
+    behavior:"Berburu secara soliter atau pasangan kecil — bukan kawanan besar seperti di film. Cakar sabit digunakan untuk menjepit dan menahan mangsa seperti elang modern, bukan merobek. Mungkin mampu memanjat pohon. Komunikasi melalui suara dan display visual bulu.",
+    habitat:"Padang pasir dan semi-arid Gobi purba. Adaptasi terhadap kondisi panas dan kering dengan mangsa berupa mamalia kecil, cicak, dan dinosaurus lebih kecil.",
+    fact:"Fosil 'Fighting Dinosaurs' (1971, Mongolia) menangkap pertarungan hidup-mati antara Velociraptor dan Protoceratops yang diawetkan seketika oleh longsoran pasir. Bukti langka perilaku berburu yang terjaga sempurna dalam batu."
+  },
+  {
+    id:"tricera", name:"Triceratops", latin:"Triceratops horridus",
+    period:"Kapur Akhir", years:"68–66 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"cretaceous", size:"large",
+    length:"7.9–9 m", weight:"6–12 ton", height:"3 m", region:"Amerika Utara",
+    tags:["Herbivora","Ceratopsian","Berlapis Baja","Bertanduk","Kapur"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/e/e1/Triceratops_AMNH_1976.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/e/e1/Triceratops_AMNH_1976.jpg",
+    desc:"Herbivora berperisai paling tangguh di akhir Kapur, dengan tiga tanduk mencolok dan frill tulang besar. Hidup sezaman dan berinteraksi langsung dengan T. rex.",
+    anatomy:"Tengkorak terbesar dari semua hewan darat, mencapai 2,5 m panjangnya. Frill tulang mengelilingi kepala belakang. Dua tanduk orbital panjang hingga 1 m. Tanduk hidung lebih pendek. Paruh keratinous seperti burung beo. Kaki kokoh menopang tubuh massif.",
+    behavior:"Hidup dalam kawanan campuran usia untuk proteksi. Merumput di padang dan semak menggunakan paruh memotong vegetasi keras. Tanduk dan frill digunakan untuk display sosial, seleksi pasangan, dan pertahanan. Jantan dewasa menanduk T. rex yang menyerang.",
+    habitat:"Dataran terbuka dan hutan tepi sungai Amerika Utara barat, ekosistem yang sama dengan T. rex. Berbagi wilayah dengan Edmontosaurus dan Ankylosaurus.",
+    fact:"Frill Triceratops memiliki pembuluh darah kaya yang bisa memerah saat terangsang — mungkin digunakan untuk komunikasi emosional, termoregulasi, dan menarik pasangan. Gigi mereka terdiri dari kolom-kolom berlapis yang terus terganti sepanjang hidup."
+  },
+  {
+    id:"stego", name:"Stegosaurus", latin:"Stegosaurus stenops",
+    period:"Jura Akhir", years:"155–150 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"jurassic", size:"large",
+    length:"9 m", weight:"3.5–7 ton", height:"4 m (puncak plat)", region:"Amerika Utara, Portugal",
+    tags:["Herbivora","Berlapis Baja","Jura","Thyreophora"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/c/c0/Stegosaurus_stenops_Sophie_28_03_2014.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/c/c0/Stegosaurus_stenops_Sophie_28_03_2014.jpg",
+    desc:"Ikon era Jura dengan plat tulang berjajar di punggung dan empat duri ekor mematikan. Meski tubuh raksasa, otaknya hanya seukuran kenari — 80 gram dari 5 ton massa tubuh.",
+    anatomy:"Dua baris plat tulang dermis di sepanjang punggung, berbentuk berlian hingga setinggi 60 cm. Empat duri ekor (thagomizer) berpasangan, masing-masing hingga 90 cm. Kepala kecil rendah dengan gigi lemah. Kaki belakang jauh lebih tinggi dari kaki depan.",
+    behavior:"Merumput rendah pada pakis, lumut, dan vegetasi rendah. Saat diserang, berbalik membelakangi predator dan mengayunkan thagomizer dengan tenaga dahsyat. Plat punggung mungkin memerah saat terancam atau mencari pasangan. Kemungkinan hidup soliter atau kelompok kecil.",
+    habitat:"Dataran bervegetasi sedang dan hutan terbuka era Jura Amerika Utara. Berbagi ekosistem dengan Allosaurus (predator utamanya), Apatosaurus, dan Diplodocus.",
+    fact:"Bukti fosil menunjukkan Allosaurus yang menyerang Stegosaurus mengalami kerusakan tulang ekor akibat thagomizer. Stegosaurus dari Portugal diduga merupakan bukti jembatan darat antara Eropa dan Amerika Utara di era Jura."
+  },
+  {
+    id:"spino", name:"Spinosaurus", latin:"Spinosaurus aegyptiacus",
+    period:"Kapur Tengah", years:"99–93 Juta Tahun Lalu",
+    diet:"piscivore", dietLabel:"Piscivora", era:"cretaceous", size:"large",
+    length:"14–18 m", weight:"7–20.9 ton", height:"2.7 m (pinggul)", region:"Afrika Utara",
+    tags:["Piscivora","Semi-Akuatik","Terbesar","Kapur","Theropoda"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/4/4c/Spinosaurus_swimming.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/4/4c/Spinosaurus_swimming.jpg",
+    desc:"Dinosaurus karnivora terbesar yang pernah diketahui, melampaui T. rex. Keunikan utamanya adalah adaptasi semi-akuatik yang luar biasa — satu-satunya dinosaurus yang benar-benar mahir berenang.",
+    anatomy:"Moncong panjang seperti buaya dengan lubang sensor tekanan di ujungnya. Layar tulang di punggung terbentuk dari duri vertebra memanjang. Ekor berbentuk dayung untuk propulsi di air (penemuan 2020). Kaki pendek dan tulang padat seperti penyelam.",
+    behavior:"Menghabiskan banyak waktu di air, berburu ikan Onchopristis raksasa dan reptil akuatik. Lubang sensor di moncong mendeteksi getaran dan tekanan air seperti buaya modern. Di darat bergerak lambat dan canggung. Mungkin soliter dan sangat teritorial di area sungai.",
+    habitat:"Delta sungai besar dan rawa tepi laut Afrika Utara purba (Formasi Kem Kem, Maroko-Aljazair sekarang). Ekosistem akuatik kaya dengan predator berlapis bagi setiap relung.",
+    fact:"Penemuan ulang Spinosaurus pada 2014 dan analisis ekor pada 2020 merevolusi pemahaman kita. Tulangnya yang padat (tidak berongga seperti kebanyakan dinosaurus) adalah adaptasi untuk daya apung negatif di air, memungkinkan menyelam untuk berburu."
+  },
+  {
+    id:"anky", name:"Ankylosaurus", latin:"Ankylosaurus magniventris",
+    period:"Kapur Akhir", years:"68–66 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"cretaceous", size:"large",
+    length:"6–8 m", weight:"4.8–8 ton", height:"1.7 m", region:"Amerika Utara",
+    tags:["Herbivora","Berlapis Baja","Kapur","Thyreophora"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/8/89/Ankylosaurus_magniventris.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/8/89/Ankylosaurus_magniventris.jpg",
+    desc:"Tank hidup era Kapur — seluruh punggung dilapisi osteoderms dan duri, ditambah gada ekor masif yang bisa menghancurkan tulang T. rex. Armor paling lengkap dalam dunia dinosaurus.",
+    anatomy:"Osteoderms (lempeng tulang dalam kulit) menutupi seluruh bagian atas tubuh. Duri samping yang menonjol. Bahkan kelopak mata dilindungi tulang ossicle. Gada ekor terbuat dari tulang fused padat. Perut lunak dan rentan — strategi: merebahkan diri ke tanah.",
+    behavior:"Merumput tanaman rendah dengan paruh lebar. Ketika diserang T. rex, berjongkok ke tanah melindungi perut, lalu mengayunkan gada ekor ke tulang kaki predator. Kemungkinan soliter atau berpasangan. Gerak lambat tapi hampir tidak terluka dari atas.",
+    habitat:"Hutan dataran rendah dan padang Amerika Utara era Kapur Akhir, ekosistem yang sama dengan T. rex dan Triceratops — hell creek formation.",
+    fact:"Gada ekor Ankylosaurus dapat menghasilkan gaya impak yang cukup untuk menghancurkan tulang paha T. rex. Fosil T. rex ditemukan dengan bekas luka yang konsisten dengan serangan gada ini — bukti pertempuran nyata yang terekam dalam batu."
+  },
+  {
+    id:"para", name:"Parasaurolophus", latin:"Parasaurolophus walkeri",
+    period:"Kapur Akhir", years:"76–73 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"cretaceous", size:"large",
+    length:"9–11 m", weight:"2.5–4 ton", height:"2 m (pinggul)", region:"Amerika Utara",
+    tags:["Herbivora","Hadrosaur","Kapur","Sosial"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/6/62/Parasaurolophus_cyrtocristatus.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/6/62/Parasaurolophus_cyrtocristatus.jpg",
+    desc:"Hadrosaur dengan jambul tabung berongga sepanjang 1,8 m yang berfungsi sebagai resonator suara — menghasilkan panggilan sekawanan yang dalam dan kuat seperti trompet.",
+    anatomy:"Jambul krestaseous yang memanjang ke belakang, berisi saluran udara berliku panjang. Mulut berbentuk paruh bebek dengan ribuan gigi berlapis-lapis (dental battery). Kaki belakang lebih kuat. Bisa berjalan dua atau empat kaki. Kulit berbintil.",
+    behavior:"Hidup kawanan besar untuk keamanan. Berkomunikasi dengan suara rendah jambul yang terdengar dari jarak jauh — memperingatkan predator, mengkoordinasikan gerakan, dan menarik pasangan. Bermigrasi musiman mengikuti vegetasi. Sangat sosial dengan hierarki kelompok.",
+    habitat:"Dataran berlimpah, rawa, dan hutan tepi sungai Amerika Utara barat. Sering bersamaan dengan Corythosaurus dan Lambeosaurus dalam kawanan besar campuran spesies.",
+    fact:"Rekonstruksi menggunakan CT scan saluran udara jambul menghasilkan suara sekitar 48 Hz — terlalu rendah untuk didengar banyak hewan modern. Jambul jantan dewasa lebih besar dari betina, mengindikasikan seleksi seksual sebagai fungsi utama."
+  },
+  {
+    id:"diplo", name:"Diplodocus", latin:"Diplodocus carnegii",
+    period:"Jura Akhir", years:"154–152 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"jurassic", size:"large",
+    length:"24–26 m", weight:"10–16 ton", height:"5 m (punggung)", region:"Amerika Utara",
+    tags:["Herbivora","Sauropoda","Jura","Terpanjang"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/f/f8/Diplodocus_Carnegie.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/f/f8/Diplodocus_Carnegie.jpg",
+    desc:"Salah satu dinosaurus terpanjang yang pernah ada — tubuhnya 90% terdiri dari leher dan ekor. Ekornya bisa menghasilkan ledakan sonik ketika dicambukkan lebih cepat dari kecepatan suara.",
+    anatomy:"Leher sangat panjang dengan vertebra bifurkasi (bercabang dua). Ekor cambuk ekstremal panjang dengan tulang tipis di ujungnya. Gigi berbentuk pensil khusus untuk menyisir daun. Kepala sangat kecil relatif terhadap tubuh. Empat kaki kolumnar seperti gajah.",
+    behavior:"Merumput di semua ketinggian dengan memanfaatkan leher fleksibel. Ekor cambuk kemungkinan digunakan komunikasi suara dan pertahanan dari predator. Hidup kawanan besar bermigrasi. Gastrolit (batu lambung) membantu mencerna vegetasi keras.",
+    habitat:"Morrison Formation — dataran aluvial semi-arid Amerika Utara Jura dengan pohon konifer, pakis, dan semak cycad. Berbagi wilayah dengan Brachiosaurus, Stegosaurus, dan Allosaurus.",
+    fact:"Simulasi komputer 1997 membuktikan ujung ekor Diplodocus bisa mencapai kecepatan supersonik saat dicambukkan, menciptakan ledakan mini sonik. Ini akan menjadi senjata pertahanan sekaligus alat komunikasi yang luar biasa."
+  },
+  {
+    id:"ptera", name:"Pteranodon", latin:"Pteranodon longiceps",
+    period:"Kapur Akhir", years:"88–84 Juta Tahun Lalu",
+    diet:"piscivore", dietLabel:"Piscivora", era:"cretaceous", size:"large",
+    length:"1.8 m (tubuh)", weight:"20–25 kg", height:"1.2 m", region:"Amerika Utara",
+    tags:["Piscivora","Terbang","Pterosaurus","Kapur"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/4/4a/Pteranodon_longiceps_mmartyniuk_wiki.png",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/4/4a/Pteranodon_longiceps_mmartyniuk_wiki.png",
+    desc:"Pterosaurus terbesar yang paling dikenal dengan bentang sayap 7–9 meter. Bukan dinosaurus, melainkan reptil terbang yang menguasai langit era Kapur di atas laut pedalaman Amerika Utara.",
+    anatomy:"Bentang sayap 7–9 m terbentuk dari membran kulit melekat jari keempat yang sangat panjang. Jambul kepala besar, lebih besar pada jantan. Tidak bergigi (beda dengan Pterodactylus). Tulang berongga sangat ringan. Berjalan dengan keempat anggota badan di darat.",
+    behavior:"Berburu ikan dengan menyelam dari udara seperti gannet modern. Melayang di arus termal di atas lautan luas. Berkoloni besar di tebing pesisir untuk berkembang biak. Dimorfisme seksual sangat jelas — jantan memiliki jambul lebih besar dan tubuh lebih besar dari betina.",
+    habitat:"Langit di atas Laut Interior Barat — jalur laut dangkal membelah Amerika Utara dari utara ke selatan selama era Kapur. Bersarang di tebing tepi laut.",
+    fact:"Pteranodon bukan dinosaurus — mereka terpisah dari nenek moyang bersama sejak Trias awal, 80 juta tahun sebelum Pteranodon hidup. Berat mereka setara anjing kecil meski rentang sayapnya sebesar pesawat Cessna kecil."
+  },
+  {
+    id:"allosaur", name:"Allosaurus", latin:"Allosaurus fragilis",
+    period:"Jura Akhir", years:"155–145 Juta Tahun Lalu",
+    diet:"carnivore", dietLabel:"Karnivora", era:"jurassic", size:"large",
+    length:"8.5–12 m", weight:"1.5–2.5 ton", height:"4.5 m", region:"Amerika Utara, Eropa",
+    tags:["Karnivora","Bipedal","Jura","Predator Puncak"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/3/30/Cleveland-Lloyd_Allosaurus.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/3/30/Cleveland-Lloyd_Allosaurus.jpg",
+    desc:"Predator puncak era Jura — 'T. rex-nya era Jura'. Lebih ringan dan gesit dari T. rex, berburu sauropoda raksasa dengan teknik berbeda: menggigit seperti kapak dengan rahang atas.",
+    anatomy:"Tengkorak lebih ringan dari T. rex dengan banyak lubang (fenestra) mengurangi berat. Tiga jari bercakar besar di setiap tangan. Tonjolan tulang di atas mata (supraorbital). Tulang ekor yang kuat. Lebih agresif dan gesit dari tyrannosaurid.",
+    behavior:"Menyerang mangsa besar dengan menerjang dan menggigit dengan rahang atas seperti kapak — menciptakan luka besar kemudian mundur menunggu mangsa melemah. Mungkin berburu berkelompok untuk mengalahkan sauropoda raksasa. Predator Stegosaurus utama.",
+    habitat:"Morrison Formation Amerika Utara bersama mangsa utamanya: Stegosaurus, Apatosaurus, dan Diplodocus. Merupakan predator paling melimpah dan serbaguna di ekosistem Jura Akhir.",
+    fact:"Cleveland-Lloyd Quarry di Utah mengandung tulang 46 individu Allosaurus — konsentrasi terbesar tulang theropoda dalam satu lokasi. Teori 'predator trap' menyatakan mereka tertarik ke lokasi rawa dan terperangkap ketika mencoba memakan herbivora yang juga terperangkap."
+  },
+  {
+    id:"iguan", name:"Iguanodon", latin:"Iguanodon bernissartensis",
+    period:"Kapur Awal", years:"130–125 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"cretaceous", size:"large",
+    length:"10–13 m", weight:"3–4 ton", height:"2.7 m (pinggul)", region:"Eropa, Asia",
+    tags:["Herbivora","Kapur","Ornithopoda","Bipedal/Quadrupedal"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/0/0e/Iguanodon_bernissartensis_Lic.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/0/0e/Iguanodon_bernissartensis_Lic.jpg",
+    desc:"Salah satu dinosaurus pertama yang diidentifikasi ilmiah (1825). Herbivora besar dengan duri ibu jari yang unik — mungkin digunakan sebagai senjata pertahanan atau alat membuka buah.",
+    anatomy:"Duri ibu jari yang keras dan tajam. Tiga jari tengah kaki berbentuk kuku. Moncong paruh tanpa gigi, dilanjutkan gigi mahkota di rahang belakang. Bisa berdiri dua atau empat kaki. Sendi pergelangan tangan kaku untuk berjalan berkaki empat.",
+    behavior:"Merumput semak, pakis, dan tumbuhan rendah menggunakan paruh dan gigi. Berjalan empat kaki saat merumput, dua kaki saat berlari. Hidup dalam kawanan untuk perlindungan. Duri ibu jari untuk perlindungan dari predator dan pertarungan antar jantan.",
+    habitat:"Dataran rendah, hutan, dan rawa Eropa era Kapur Awal. Fosil ditemukan dalam jumlah luar biasa di tambang batu bara Bernissart, Belgia — 38 individu utuh ditemukan tahun 1878.",
+    fact:"Ketika pertama dideskripsikan, duri ibu jari Iguanodon keliru ditempatkan di hidung, membuatnya terlihat seperti iguana bertanduk raksasa. Kesalahan rekonstruksi bersejarah ini tidak dikoreksi sampai fosil lengkap ditemukan di Bernissart."
+  },
+  {
+    id:"compy", name:"Compsognathus", latin:"Compsognathus longipes",
+    period:"Jura Akhir", years:"150 Juta Tahun Lalu",
+    diet:"carnivore", dietLabel:"Karnivora", era:"jurassic", size:"small",
+    length:"0.9–1.25 m", weight:"0.26–3.5 kg", height:"0.25 m", region:"Eropa (Jerman, Prancis)",
+    tags:["Karnivora","Kecil","Jura","Theropoda"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/e/e3/Compsognathus_longipes_old_skull.JPG",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/e/e3/Compsognathus_longipes_old_skull.JPG",
+    desc:"Salah satu dinosaurus terkecil yang pernah diketahui — seukuran ayam jantan. Meski mungil, mereka adalah predator lincah yang berburu mangsa kecil di pulau-pulau kepulauan Eropa era Jura.",
+    anatomy:"Tubuh mungil sangat ringan. Leher panjang fleksibel. Kepala kecil dengan gigi kecil tajam. Dua lengan kecil dengan dua jari bercakar. Kaki panjang proporsional untuk berlari cepat. Ekor panjang menyeimbangkan tubuh.",
+    behavior:"Berburu cecak, serangga besar, dan mamalia kecil dengan kecepatan tinggi. Kemungkinan berenang antar pulau dalam kepulauan Eropa purba. Mungkin hidup soliter. Kemungkinan memiliki proto-bulu meski tidak ada bukti fosil langsung.",
+    habitat:"Kepulauan kecil di perairan dangkal Laut Tethys purba — Eropa era Jura adalah kepulauan, bukan benua padat. Fosil yang sangat terpelihara dalam batu kapur laguna di Bavaria menunjukkan lingkungan pantai.",
+    fact:"Compsognathus ditemukan dengan sisa-sisa cecak Bavarisaurus di dalam rongga perutnya — memberikan bukti langsung menu makanannya. Ini menjadikannya salah satu bukti pertama dan terbaik dari isi perut dinosaurus."
+  },
+  {
+    id:"pachyc", name:"Pachycephalosaurus", latin:"Pachycephalosaurus wyomingensis",
+    period:"Kapur Akhir", years:"72–66 Juta Tahun Lalu",
+    diet:"omnivore", dietLabel:"Omnivora", era:"cretaceous", size:"large",
+    length:"4.5–5 m", weight:"300–450 kg", height:"1.5 m", region:"Amerika Utara",
+    tags:["Omnivora","Berkepala Kubah","Kapur","Marginocephalia"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/8/8f/Pachycephalosaurus.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/8/8f/Pachycephalosaurus.jpg",
+    desc:"Dinosaurus 'kepala kubah' — tulang tengkorak di atasnya setebal 25 cm, digunakan untuk pertarungan kepala-dengan-kepala antar jantan dalam kompetisi dominasi kawanan.",
+    anatomy:"Kubah tengkorak tulang padat berlapis setebal 25 cm. Duri dan tonjolan di sekeliling kubah. Tubuh kompak dengan dua kaki. Gigi kecil tajam untuk memotong. Ekor kaku dengan tendon yang mengeras.",
+    behavior:"Pertarungan kepala-dengan-kepala untuk dominasi dan hak kawin — mirip bighorn sheep modern. Makan buah-buahan, daun, biji, serangga, dan kemungkinan hewan kecil (omnivora). Mungkin hidup dalam kelompok dengan hierarki dominasi.",
+    habitat:"Dataran terbuka dan hutan Amerika Utara era Kapur Akhir. Hidup di ketinggian lebih tinggi dari kebanyakan dinosaurus di ekosistemnya berdasarkan sedimen fosil.",
+    fact:"Analisis biomekanikal kontroversial menunjukkan kubah kepala mungkin tidak cukup kuat untuk benturan langsung kepala-ke-kepala. Teori alternatif: digunakan untuk mendorong dan mendorong ke sisi tubuh lawan, atau sebagai display visual semata."
+  },
+  {
+    id:"maiasaura", name:"Maiasaura", latin:"Maiasaura peeblesorum",
+    period:"Kapur Akhir", years:"76.7–76.5 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"cretaceous", size:"large",
+    length:"9 m", weight:"2.5–3.5 ton", height:"2.5 m", region:"Amerika Utara (Montana)",
+    tags:["Herbivora","Kapur","Hadrosaur","Sosial","Merawat Anak"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/3/31/Maiasaura_peeblesorum.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/3/31/Maiasaura_peeblesorum.jpg",
+    desc:"'Kadal Ibu yang Baik' — bukti pertama bahwa dinosaurus merawat anaknya setelah menetas. Ditemukan dalam koloni sarang raksasa dengan sisa bayi yang masih di sarang.",
+    anatomy:"Tubuh besar berotot. Paruh bebek datar tanpa jambul (beda dengan Parasaurolophus). Gigi berlapis-lapis ribuan untuk menggiling. Kaki belakang kuat. Tungkai depan untuk berjalan berkaki empat.",
+    behavior:"Berkoloni dalam ribuan individu selama musim bersarang. Sarang berbentuk gundukan lumpur dengan diameter 2 m. Induk membawa makanan ke anak yang belum bisa berjalan. Migrasi musiman ribuan km. Bukti perawatan anak pertama pada dinosaurus.",
+    habitat:"Dataran aluvial Montana Amerika Utara era Kapur. Situs Egg Mountain di Montana adalah salah satu situs fosil dinosaurus terkaya di dunia dengan ratusan sarang dan ribuan tulang.",
+    fact:"'Egg Mountain' Montana (ditemukan 1978 oleh Jack Horner) mengubah total pemahaman kita tentang perilaku dinosaurus. Sebelumnya dinosaurus dianggap meninggalkan telur begitu saja. Maiasaura membuktikan mereka adalah orang tua yang peduli."
+  },
+  {
+    id:"carno", name:"Carnotaurus", latin:"Carnotaurus sastrei",
+    period:"Kapur Akhir", years:"72–70 Juta Tahun Lalu",
+    diet:"carnivore", dietLabel:"Karnivora", era:"cretaceous", size:"large",
+    length:"7.5–9 m", weight:"1–2 ton", height:"3 m", region:"Amerika Selatan (Argentina)",
+    tags:["Karnivora","Kapur","Abelisaurid","Bertanduk"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/5/52/Carnotaurus_Reconstruction.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/5/52/Carnotaurus_Reconstruction.jpg",
+    desc:"Predator unik dengan dua tanduk di atas mata seperti banteng — satu-satunya karnivora bertanduk yang diketahui. Lengannya bahkan lebih kecil dari T. rex namun kakinya sangat cepat.",
+    anatomy:"Dua tanduk tulang horizontal di atas orbit mata. Kepala sangat pendek dan dalam untuk ukuran tubuh. Lengan vestigial — lebih kecil dari T. rex. Kaki panjang dan ramping adaptasi kecepatan. Kulit bersisik dengan tonjolan dermis berukuran berbeda ditemukan langsung dari fosil kulit.",
+    behavior:"Predator kecepatan tinggi yang mengejar mangsa di padang terbuka. Mungkin lebih cepat dari T. rex berdasarkan proporsi kaki. Tanduk digunakan untuk pertempuran intraspesifik. Berburu herbivora menengah di Amerika Selatan yang lebih terisolasi dari ekosistem Amerika Utara.",
+    habitat:"Patagonia Argentina era Kapur Akhir. Amerika Selatan saat itu adalah benua pulau yang terisolasi, menghasilkan fauna dinosaurus yang sangat berbeda dari Amerika Utara dan Eropa.",
+    fact:"Carnotaurus adalah satu-satunya non-avian theropoda yang fosilnya memiliki sisa kulit terawat baik — memberikan gambaran langsung tentang tekstur kulit dinosaurus. Kulitnya bersisik besar dengan tonjolan dermis seperti buaya, bukan bulu."
+  },
+  {
+    id:"theri", name:"Therizinosaurus", latin:"Therizinosaurus cheloniformis",
+    period:"Kapur Akhir", years:"70 Juta Tahun Lalu",
+    diet:"herbivore", dietLabel:"Herbivora", era:"cretaceous", size:"large",
+    length:"9–10 m", weight:"3–5 ton", height:"5 m", region:"Mongolia, Cina",
+    tags:["Herbivora","Kapur","Therizinosaur","Cakar Terpanjang"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/7/71/Therizinosaurus.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/7/71/Therizinosaurus.jpg",
+    desc:"Theropoda terbesar yang telah berevolusi menjadi herbivora — dengan cakar terpanjang dari semua hewan yang diketahui, mencapai 91 cm. Anomali evolusi yang menakjubkan dalam dunia dinosaurus.",
+    anatomy:"Cakar depan hingga 91 cm — paling panjang dari semua hewan. Tubuh gempal seperti tanah beruang. Leher panjang. Kepala kecil dengan gigi daun-runcing untuk makan tumbuhan. Kemungkinan berbulu tebal. Postur tegak.",
+    behavior:"Menarik dan merobek cabang pohon menggunakan cakar raksasanya, kemudian memakan daun dan tunas. Cakar juga efektif untuk pertahanan dari predator seperti Tarbosaurus. Mungkin mirip beruang panda raksasa dalam cara makan — duduk bersandar dan menarik ranting ke mulut.",
+    habitat:"Asia Timur era Kapur Akhir — Formasi Nemegt Mongolia. Ekosistem campuran dataran banjir dan hutan yang juga dihuni Tarbosaurus (relatif T. rex Asia) dan Oviraptor.",
+    fact:"Therizinosaurus awalnya dideskripsikan dari calonnya yang membingungkan — hanya cakar raksasa ditemukan dan diperkirakan milik kura-kura laut raksasa. Baru ketika spesimen lebih lengkap ditemukan, barulah jelas ini adalah theropoda herbivora anomali yang luar biasa."
+  },
+  {
+    id:"oviraptor", name:"Oviraptor", latin:"Oviraptor philoceratops",
+    period:"Kapur Akhir", years:"75–71 Juta Tahun Lalu",
+    diet:"omnivore", dietLabel:"Omnivora", era:"cretaceous", size:"small",
+    length:"1.6–2 m", weight:"20–35 kg", height:"0.75 m", region:"Mongolia",
+    tags:["Omnivora","Kapur","Oviraptorosaur","Berbulu","Merawat Anak"],
+    img:"https://upload.wikimedia.org/wikipedia/commons/0/07/Oviraptor_reconstruction.jpg",
+    imgFull:"https://upload.wikimedia.org/wikipedia/commons/0/07/Oviraptor_reconstruction.jpg",
+    desc:"Ironisnya, namanya berarti 'pencuri telur' tapi bukti fosil justru menunjukkan ia adalah induk yang penuh kasih yang mengerami sarangnya sendiri — namanya adalah kesalahan ilmiah bersejarah.",
+    anatomy:"Jambul kepala yang mencolok (mirip kakatua). Paruh keras tanpa gigi untuk memecahkan cangkang dan biji. Sepenuhnya berbulu. Lengan panjang dengan cakar. Ekor berbulu lebat mirip ekor burung modern. Sangat mirip burung modern secara struktural.",
+    behavior:"Mengerami telur dengan menenggelamkan diri di atas sarang persis seperti burung modern — fosil ditemukan di atas sarang dalam posisi ini. Omnivora: makan telur, biji, buah, serangga, dan hewan kecil. Mungkin menampilkan display bulu berwarna-warni untuk menarik pasangan.",
+    habitat:"Padang dan dataran semi-arid Gobi Mongolia era Kapur. Ekosistem yang sama dengan Velociraptor dan Protoceratops, di mana makanan langka dan bervariasi.",
+    fact:"Ketika pertama ditemukan di atas sarang telur pada 1923, diasumsikan sedang mencuri telur Protoceratops. Nama 'Oviraptor' (pencuri telur) pun diberikan. 70 tahun kemudian, analisis DNA embrio dalam telur membuktikan itu adalah sarangnya SENDIRI — kesalahan ilmiah selama seabad."
+  }
+];
+
+// ========================
+// DATA TUMBUHAN (10 spesies)
+// ========================
+const plants = [
+  {
+    id:"ginkgo", name:"Ginkgo Purba", latin:"Ginkgo biloba (purba)",
+    category:["cycad","living-fossil","tree"],
+    era:"270 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/4/40/Gingko_biloba_tree_on_Bundesplatz%2C_Bern%2C_Switzerland.jpg",
+    desc:"Pohon fosil hidup tertua di bumi. Hampir tidak berubah morfologisnya selama 270 juta tahun. Daun berbentuk kipas yang ikonik tidak berubah sejak dinosaurus pertama berjalan di bumi. Selamat dari kepunahan K-Pg yang memusnahkan dinosaurus.",
+    detail:"Ginkgo adalah satu-satunya spesies yang tersisa dari divisi Ginkgophyta yang dulunya beragam. Pada era Jura dan Kapur, berbagai spesies Ginkgo mendominasi hutan belahan bumi utara. Pohon ini dioecious (jantan-betina terpisah), tumbuh hingga 35 m, dan bisa hidup lebih dari 2.500 tahun. Fosil daun Ginkgo identik dengan spesies modern ditemukan dalam batuan berusia 200 juta tahun.",
+    ecology:"Pada era Jura, hutan Ginkgo membentang di seluruh belahan bumi utara dan menjadi makanan penting herbivora sauropoda. Bijinya kaya lemak, sumber kalori berharga.",
+    livingFossil:true,
+    period:"Permian–Sekarang"
+  },
+  {
+    id:"cycas", name:"Cycas Purba", latin:"Cycas revoluta (nenek moyang)",
+    category:["cycad","living-fossil","tree"],
+    era:"280 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Cycas_revoluta_male.jpg",
+    desc:"Salah satu tanaman paling primitif yang masih hidup — 'pohon palem' yang bukan palem. Pada era Jura, cycad mendominasi lanskap dan menjadi makanan utama dinosaurus herbivora. Biji dan batangnya beracun sebagai pertahanan.",
+    detail:"Cycad muncul pada Permian dan mencapai kejayaannya di era Jura — Jura sering disebut 'Usia Cycad' karena dominasinya. Mereka tumbuh sangat lambat (beberapa cm per tahun), hidup ratusan tahun, dan berevolusi bersama dinosaurus. Struktur reproduksi (strobilus) berada di pusat daun mahkota.",
+    ecology:"Herbivora raksasa seperti Apatosaurus, Brachiosaurus, dan Diplodocus kemungkinan memakan daun cycad dalam jumlah besar setiap hari. Beberapa ilmuwan menyatakan 80% diet sauropoda adalah cycad.",
+    livingFossil:true,
+    period:"Permian–Sekarang"
+  },
+  {
+    id:"araucaria", name:"Araucaria Purba", latin:"Araucaria mirabilis",
+    category:["conifer","tree"],
+    era:"200 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/8/85/Araucaria_araucana_forest.jpg",
+    desc:"Konifer dominan era Jura yang membentuk hutan raksasa di seluruh Gondwana. Brachiosaurus dan sauropoda lain menjangkau pucuk pohon ini. Spesies modern seperti Monkey Puzzle Tree adalah keturunan langsung pohon yang pernah dimakan dinosaurus.",
+    detail:"Araucaria purba mencapai ketinggian luar biasa, beberapa spesies hingga 60 meter. Hutan Araucaria ditemukan pada fosil di Patagonia Argentina (Formasi Cañadón Asfalto) yang sempurna terawetkan oleh abu vulkanik. Kayu silikanya identik dengan Araucaria modern.",
+    ecology:"Hutan Araucaria purba membentuk kanopi tinggi yang hanya bisa dijangkau sauropoda leher panjang. Persebaran biji oleh dinosaurus berperan dalam distribusi pohon di seluruh Gondwana.",
+    livingFossil:false,
+    period:"Trias–Sekarang"
+  },
+  {
+    id:"fern", name:"Pakis Pohon Purba", latin:"Pecopteris sp. / Cyathea purba",
+    category:["fern","tree"],
+    era:"360 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/4/4b/Pecopteris%2C_Carboniferous%2C_Illinois_%286970890028%29.jpg",
+    desc:"Penguasa era Karbon yang tumbuh setinggi 30 meter, membentuk hutan raksasa yang kemudian menjadi lapisan batu bara global. Pakis adalah salah satu tumbuhan paling sukses sepanjang sejarah bumi — bertahan melewati lima kepunahan massal.",
+    detail:"Pakis muncul lebih dari 360 juta tahun lalu dan telah melalui lima kepunahan massal tanpa punah. Era Karbon adalah usia emas pakis pohon — bersama Lepidodendron dan Calamites, mereka membentuk hutan karbon yang menyerap CO2 dalam jumlah masif, mendinginkan iklim bumi. Fosil spor pakis ditemukan di hampir semua lapisan sedimen.",
+    ecology:"Pada era Jurassic dan Cretaceous, pakis membentuk lapisan semak lebat di lantai hutan dan menjadi makanan utama herbivora kecil-menengah. Mereka juga menjadi indikator lingkungan lembab.",
+    livingFossil:false,
+    period:"Devon–Sekarang"
+  },
+  {
+    id:"calamites", name:"Ekor Kuda Raksasa", latin:"Calamites sp.",
+    category:["fern","tree"],
+    era:"350 Juta Tahun Lalu — 251 Juta Tahun Lalu",
+    img:"https://upload.wikimedia.org/wikipedia/commons/d/d6/Calamites_suckowii.jpg",
+    desc:"Pohon raksasa dari kelompok equisetum (ekor kuda) yang mencapai 20 meter tingginya. Batang berongga beruasnya yang khas menjadi ciri identitas fosil mereka. Bersama pakis dan Lepidodendron, mereka membentuk hutan karbon megah yang kini menjadi batu bara dunia.",
+    detail:"Calamites adalah raksasa era Karbon yang punah di akhir Permian. Kerabat modernnya adalah ekor kuda kecil (Equisetum) yang hanya setinggi 1 meter. Perbedaan ukuran ini mencerminkan betapa berbedanya kondisi atmosfer era Karbon — kadar oksigen mencapai 35%, mendukung pertumbuhan raksasa.",
+    ecology:"Tumbuh dominan di rawa-rawa tepi sungai dan delta era Karbon. Menjadi habitat penting bagi amfibi raksasa dan serangga raksasa seperti capung Meganeura bersayap 70 cm.",
+    livingFossil:false,
+    period:"Karbon–Permian"
+  },
+  {
+    id:"lepi", name:"Lepidodendron", latin:"Lepidodendron sp.",
+    category:["tree"],
+    era:"359 Juta Tahun Lalu — 300 Juta Tahun Lalu",
+    img:"https://upload.wikimedia.org/wikipedia/commons/8/84/Lepidodendron_aculeatum_fossil.jpg",
+    desc:"'Pohon sisik' raksasa dengan pola berlian khas di batangnya — likofit terbesar yang pernah ada, mencapai 50 meter tinggi dan 2 meter diameter. Bersama Calamites dan pakis, membentuk sebagian besar cadangan batu bara dunia saat ini.",
+    detail:"Lepidodendron mencapai ukuran puncak pada era Karbon berkat kadar oksigen atmosfer yang tinggi (35%). Pola berlian pada batangnya adalah bekas tangkai daun yang berguguran seiring pertumbuhan. Pertumbuhan pohon ini anomali — mereka hampir tidak bercabang sampai tiba-tiba bercabang masif menjelang berbuah, lalu mati.",
+    ecology:"Hutan Lepidodendron adalah ekosistem karbon terbesar dalam sejarah bumi. Ketika pohon-pohon ini mati dan terjatuh ke rawa anaerob, mereka tidak terdekomposisi melainkan terawetkan dan terakumulasi menjadi lapisan batu bara yang kita tambang sekarang.",
+    livingFossil:false,
+    period:"Karbon"
+  },
+  {
+    id:"welwitschia", name:"Welwitschia", latin:"Welwitschia mirabilis",
+    category:["living-fossil","cycad"],
+    era:"250 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/6/62/Welwitschia_mirabilis.jpg",
+    desc:"Makhluk tumbuhan paling aneh di bumi — hanya memiliki dua daun yang tumbuh terus selama ribuan tahun hingga terkoyak-koyak angin menjadi ratusan helai. Beberapa individu berusia lebih dari 2.000 tahun dan hidup sejak zaman dinosaurus.",
+    detail:"Welwitschia hanya tumbuh di Gurun Namib Afrika. Dua daunnya tumbuh terus sepanjang hidup dengan kecepatan 1-1,5 cm per tahun. Tumbuhan ini hampir tidak bisa dibunuh — tahan suhu ekstrem, kekeringan, dan bertahan hidup dari embun saja. Fosilnya ditemukan dari era Jurassic, menunjukkan hampir tidak berubah selama 250 juta tahun.",
+    ecology:"Pada masa purba, Welwitschia mungkin lebih tersebar luas sebelum iklim berubah. Hari ini terbatas di Namib — salah satu gurun paling tua dan kering di bumi.",
+    livingFossil:true,
+    period:"Trias–Sekarang"
+  },
+  {
+    id:"horsetail", name:"Ekor Kuda Modern", latin:"Equisetum hyemale (purba)",
+    category:["fern","living-fossil","aquatic"],
+    era:"400 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/5/52/Equisetum_hyemale.jpg",
+    desc:"Kerabat Calamites yang selamat — fosil hidup yang mewakili garis keturunan lebih dari 400 juta tahun. Meski kini hanya setinggi 1 meter, nenek moyangnya adalah pohon 20 meter yang mendominasi rawa-rawa era Karbon.",
+    detail:"Equisetum adalah genus tanaman yang tua. Strukturnya segmental dengan simpul dan daun seperti sisik kecil tidak berubah sejak Devon. Kandungan silika tinggi membuat batangnya keras seperti gelas — digunakan sebagai amplas alami oleh peradaban kuno. Tumbuh di lingkungan lembab dan semi-akuatik.",
+    ecology:"Tumbuh di tepian sungai, rawa, dan area lembab. Sering menjadi vegetasi pertama yang merebut lahan pasca bencana — pioneer ekologis. Dinosaurus kecil mungkin memakan batang mudanya.",
+    livingFossil:true,
+    period:"Devon–Sekarang"
+  },
+  {
+    id:"wollemi", name:"Pohon Wollemi", latin:"Wollemia nobilis",
+    category:["conifer","living-fossil","tree"],
+    era:"200 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/e/e8/Wollemia_nobilis_Wash.jpg",
+    desc:"Penemuan botani terbesar abad 20 — pada 1994, pohon konifer yang hanya dikenal dari fosil 200 juta tahun lalu ditemukan masih hidup di jurang tersembunyi Blue Mountains Australia. Hanya 100 individu liar yang diketahui.",
+    detail:"Wollemi Pine ditemukan 1994 oleh David Noble di lembah tersembunyi Blue Mountains. DNA-nya hampir identik dengan fosil berusia 200 juta tahun. Pohon ini mencapai 40 meter dengan kulit khas berbintil gelap seperti gelembung coklat. Setiap pucuk menghasilkan wax putih unik untuk melindungi pertumbuhan baru.",
+    ecology:"Pada era Jura, Wollemia dan kerabatnya adalah komponen utama hutan konifer di Gondwana selatan. Keberadaan komunitas tersembunyi di Australia adalah bukti luar biasa bagaimana kehidupan dapat bertahan selama puluhan juta tahun di lingkungan terlindung.",
+    livingFossil:true,
+    period:"Trias–Sekarang"
+  },
+  {
+    id:"horntail", name:"Ekor Kuda Raksasa Tumbuhan Akuatik", latin:"Nelumbo purba / Nymphaea purba",
+    category:["aquatic","fern"],
+    era:"100 Juta Tahun Lalu — Hingga Kini",
+    img:"https://upload.wikimedia.org/wikipedia/commons/c/c6/Nymphaea_lotus_Luc_Viatour.jpg",
+    desc:"Tanaman teratai air purba adalah di antara tanaman berbunga paling pertama yang berevolusi. Pada era Kapur, tumbuhan berbunga (angiosperm) mulai mendominasi, termasuk teratai air yang tumbuh di danau dan sungai tempat dinosaurus minum.",
+    detail:"Fosil Nymphaea (teratai air) ditemukan dalam sedimen Kapur berusia 95 juta tahun. Angiosperma (tanaman berbunga) adalah revolusi botani terbesar dalam sejarah bumi — muncul awal Kapur dan dalam 30 juta tahun berevolusi dari hampir nol menjadi tanaman paling dominan. Teratai air adalah salah satu angiosperm paling primitif.",
+    ecology:"Danau dan sungai tempat dinosaurus minum kemungkinan dilapisi teratai air purba. Parasaurolophus dan hadrosaur lain mungkin memakan tumbuhan akuatik sebagai bagian penting diet mereka.",
+    livingFossil:true,
+    period:"Kapur–Sekarang"
+  }
+];
+
+// ========================
+// DATA ERA GEOLOGI
+// ========================
+const eras = [
+  {
+    period:"4.600 — 541 Juta Tahun Lalu",
+    name:"Era Prakambrium",
+    desc:"Era terpanjang mencakup 88% sejarah bumi. Kehidupan pertama muncul sebagai prokariota bersel tunggal sekitar 3,8 miliar tahun lalu. Cyanobacteria memulai fotosintesis, secara bertahap mengubah atmosfer anoksik menjadi kaya oksigen — peristiwa yang disebut Great Oxidation Event sekitar 2,4 miliar tahun lalu. Menjelang akhir era ini, organisme multiseluler pertama (Ediacaran fauna) muncul dalam lautan dangkal.",
+    highlight:"Great Oxidation Event 2,4 miliar tahun lalu hampir membunuh seluruh kehidupan anaerob — sebuah kepunahan massal pertama yang digerakkan oleh kehidupan itu sendiri."
+  },
+  {
+    period:"541 — 252 Juta Tahun Lalu",
+    name:"Era Paleozoikum",
+    desc:"Ledakan Kambrium menandai diversifikasi kehidupan secara dramatik dalam waktu singkat. Ikan bertulang rawan dan bertulang sejati muncul di Devon. Tumbuhan vaskular pertama merebut daratan. Serangga terbang muncul pada Karbon. Amfibi raksasa dan reptil pertama berkembang. Era berakhir dengan Kepunahan Massal Permo-Trias (252 juta tahun lalu) yang memusnahkan 96% spesies laut dan 70% vertebrata darat — kepunahan terbesar dalam sejarah bumi.",
+    highlight:"Hutan Karbon mengubur miliaran ton karbon menjadi batu bara — menyebabkan penurunan CO2 dramatis dan zaman es Karbon yang berlangsung 60 juta tahun."
+  },
+  {
+    period:"252 — 201 Juta Tahun Lalu",
+    name:"Periode Trias",
+    desc:"Pemulihan pasca kepunahan Permo-Trias berlangsung lambat. Dinosaurus pertama muncul pada Trias Tengah (237 juta tahun lalu) sebagai hewan kecil bipedal. Mamalia pertama dan pterosaurus juga berevolusi. Semua daratan masih menyatu dalam superbenua Pangaea, memungkinkan fauna serupa di seluruh dunia. Era berakhir dengan kepunahan Trias-Jura yang membuka jalan bagi dominasi dinosaurus.",
+    highlight:"Eoraptor lunensis dari Argentina (231 juta tahun lalu) adalah dinosaurus tertua yang diketahui — hanya 1 meter panjangnya, penanda awal kebangkitan yang akan mengubah bumi selama 165 juta tahun berikutnya."
+  },
+  {
+    period:"201 — 145 Juta Tahun Lalu",
+    name:"Periode Jura — Zaman Keemasan Sauropoda",
+    desc:"Pangaea mulai pecah, memisahkan Laurasia di utara dan Gondwana di selatan. Sauropoda raksasa seperti Brachiosaurus dan Diplodocus mendominasi sebagai herbivora terbesar. Predator besar Allosaurus menguasai puncak rantai makanan. Burung pertama (Archaeopteryx) muncul sebagai keturunan langsung theropoda berbulu. Iklim hangat dan lembab menghasilkan vegetasi lebat yang menopang dinosaurus raksasa.",
+    highlight:"Archaeopteryx lithographica (150 juta tahun lalu) adalah 'missing link' antara dinosaurus dan burung — memiliki bulu, cakar, dan gigi sekaligus, bukti paling ikonik evolusi."
+  },
+  {
+    period:"145 — 66 Juta Tahun Lalu",
+    name:"Periode Kapur — Puncak dan Kehancuran",
+    desc:"Diversifikasi maksimum dinosaurus dengan ribuan spesies mengisi semua relung ekologis. Tanaman berbunga (angiosperm) berevolusi dan dalam 30 juta tahun mendominasi vegetasi bumi. T. rex, Triceratops, dan Spinosaurus hidup dalam ekosistem paling kompleks yang pernah ada. Pada 66 juta tahun lalu, asteroid diameter 10 km menghantam Yucatan Mexico (Chicxulub impactor) — memicu kepunahan K-Pg yang memusnahkan 75% spesies termasuk semua dinosaurus non-avian.",
+    highlight:"Impak Chicxulub melepaskan energi setara 10 miliar bom atom, memicu musim dingin nuklir selama bertahun-tahun, tsunami global, dan hujan asam yang melenyapkan peradaban dinosaurus yang telah berkuasa 165 juta tahun."
+  },
+  {
+    period:"66 Juta Tahun Lalu — Kini",
+    name:"Era Kenozoikum — Kebangkitan Mamalia",
+    desc:"Setelah kepunahan K-Pg, mamalia kecil yang bertahan mengisi relung kosong yang ditinggalkan dinosaurus. Primata berevolusi 55 juta tahun lalu. Serangkaian zaman es dimulai 2,6 juta tahun lalu. Mammoth berbulu, saber-tooth tigers, dan megafauna lain mendominasi. Homo sapiens muncul 300.000 tahun lalu. Dalam waktu singkat secara geologis, satu spesies kecil memulai kepunahan massal ke-6 yang masih berlangsung hari ini.",
+    highlight:"Burung modern ADALAH dinosaurus — bukan hanya keturunannya. Sekitar 10.000 spesies burung adalah satu-satunya garis keturunan dinosaurus yang selamat dari kepunahan K-Pg, berkembang pesat hingga hari ini."
+  }
+];
+
+// ========================
+// STATE
+// ========================
+let currentDinoFilter = 'all';
+let currentPlantFilter = 'all';
+let dinoSearch = '';
+let plantSearch = '';
+
+// ========================
+// RENDER FUNCTIONS
+// ========================
+function renderDinos() {
+  const grid = document.getElementById('dinoGrid');
+  const noResult = document.getElementById('dinoNoResult');
+  let count = 0;
+  
+  dinosaurs.forEach((d, i) => {
+    let el = document.getElementById('dino-card-'+d.id);
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'card reveal';
+      el.id = 'dino-card-'+d.id;
+      el.innerHTML = `
+        <div class="card-img-wrap">
+          <img class="card-img" src="${d.img}" alt="${d.name}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_black_cross.svg/240px-Simple_black_cross.svg.png'; this.style.objectFit='contain'; this.style.padding='40px'">
+          <div class="card-img-overlay"></div>
+          <span class="card-era-badge">${d.period}</span>
+          <span class="diet-tag diet-${d.diet}">${d.dietLabel}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">${d.name}</div>
+          <div class="card-latin">${d.latin}</div>
+          <div class="card-desc">${d.desc}</div>
+          <div class="card-stats">
+            <div class="stat-item"><span class="stat-label">Panjang</span><span class="stat-val">${d.length}</span></div>
+            <div class="stat-item"><span class="stat-label">Berat</span><span class="stat-val">${d.weight}</span></div>
+            <div class="stat-item"><span class="stat-label">Tinggi</span><span class="stat-val">${d.height}</span></div>
+            <div class="stat-item"><span class="stat-label">Wilayah</span><span class="stat-val">${d.region}</span></div>
+          </div>
+          <div class="card-more">Detail Lengkap →</div>
+        </div>`;
+      el.onclick = () => openDinoModal(i);
+      grid.appendChild(el);
+      setTimeout(() => observer.observe(el), 50);
+    }
+    
+    const show = matchDino(d);
+    el.classList.toggle('hidden', !show);
+    if (show) count++;
+  });
+  
+  document.getElementById('dinoCount').textContent = count;
+  noResult.classList.toggle('show', count === 0);
+}
+
+function matchDino(d) {
+  if (dinoSearch && !d.name.toLowerCase().includes(dinoSearch) && !d.latin.toLowerCase().includes(dinoSearch) && !d.desc.toLowerCase().includes(dinoSearch) && !d.region.toLowerCase().includes(dinoSearch)) return false;
+  if (currentDinoFilter === 'all') return true;
+  if (currentDinoFilter === 'carnivore') return d.diet === 'carnivore';
+  if (currentDinoFilter === 'herbivore') return d.diet === 'herbivore';
+  if (currentDinoFilter === 'omnivore') return d.diet === 'omnivore';
+  if (currentDinoFilter === 'piscivore') return d.diet === 'piscivore';
+  if (currentDinoFilter === 'triassic') return d.era === 'triassic';
+  if (currentDinoFilter === 'jurassic') return d.era === 'jurassic';
+  if (currentDinoFilter === 'cretaceous') return d.era === 'cretaceous';
+  if (currentDinoFilter === 'large') return d.tags.includes('Raksasa') || parseFloat(d.length) >= 10 || d.length.includes('14') || d.length.includes('24') || d.length.includes('26') || d.length.includes('12') || d.length.includes('9 m') || d.length.includes('10') || d.length.includes('11') || d.length.includes('7') || d.name === "Pteranodon";
+  if (currentDinoFilter === 'small') return parseFloat(d.length) < 5 || d.length.startsWith('0') || d.length.startsWith('1') || d.length.startsWith('2') || d.length.startsWith('3') || d.length.startsWith('4');
+  if (currentDinoFilter === 'flying') return d.tags.includes('Terbang');
+  if (currentDinoFilter === 'armored') return d.tags.includes('Berlapis Baja') || d.tags.includes('Bertanduk');
+  return true;
+}
+
+function renderPlants() {
+  const grid = document.getElementById('plantGrid');
+  const noResult = document.getElementById('plantNoResult');
+  let count = 0;
+  
+  plants.forEach((p, i) => {
+    let el = document.getElementById('plant-card-'+p.id);
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'card plant-card reveal';
+      el.id = 'plant-card-'+p.id;
+      el.innerHTML = `
+        <div class="card-img-wrap">
+          <img class="card-img" src="${p.img}" alt="${p.name}" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_black_cross.svg/240px-Simple_black_cross.svg.png'; this.style.objectFit='contain'; this.style.padding='40px'">
+          <div class="card-img-overlay"></div>
+          <span class="card-era-badge">${p.period || ''}</span>
+          <span class="diet-tag diet-plant">${p.livingFossil ? 'Fosil Hidup' : 'Punah Sebagian'}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">${p.name}</div>
+          <div class="card-latin">${p.latin}</div>
+          <div class="card-desc">${p.desc}</div>
+          <div class="card-stats">
+            <div class="stat-item" style="grid-column:1/-1"><span class="stat-label">Era</span><span class="stat-val">${p.era}</span></div>
+          </div>
+          <div class="card-more" style="color:#7ab84a">Detail Ekologi →</div>
+        </div>`;
+      el.onclick = () => openPlantModal(i);
+      grid.appendChild(el);
+      setTimeout(() => observer.observe(el), 50);
+    }
+    
+    const show = matchPlant(p);
+    el.classList.toggle('hidden', !show);
+    if (show) count++;
+  });
+  
+  document.getElementById('plantCount').textContent = count;
+  noResult.classList.toggle('show', count === 0);
+}
+
+function matchPlant(p) {
+  if (plantSearch && !p.name.toLowerCase().includes(plantSearch) && !p.latin.toLowerCase().includes(plantSearch)) return false;
+  if (currentPlantFilter === 'all') return true;
+  if (currentPlantFilter === 'living-fossil') return p.livingFossil === true;
+  return p.category && p.category.includes(currentPlantFilter);
+}
+
+function renderTimeline() {
+  const tl = document.getElementById('timeline');
+  eras.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'tl-item';
+    div.innerHTML = `<div class="tl-dot"></div><div class="tl-period">${e.period}</div><div class="tl-name">${e.name}</div><div class="tl-desc">${e.desc}</div><div class="tl-highlight">${e.highlight}</div>`;
+    tl.appendChild(div);
+    tlObserver.observe(div);
+  });
+}
+
+// ========================
+// FILTER ACTIONS
+// ========================
+function setDinoFilter(f, btn) {
+  currentDinoFilter = f;
+  document.querySelectorAll('#dinosaurus .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderDinos();
+}
+function setPlantFilter(f, btn) {
+  currentPlantFilter = f;
+  document.querySelectorAll('#tumbuhan .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPlants();
+}
+function filterDinos() {
+  dinoSearch = document.getElementById('dinoSearch').value.toLowerCase().trim();
+  renderDinos();
+}
+function filterPlants() {
+  plantSearch = document.getElementById('plantSearch').value.toLowerCase().trim();
+  renderPlants();
+}
+
+// ========================
+// MODALS
+// ========================
+function openDinoModal(i) {
+  const d = dinosaurs[i];
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-img-wrap">
+      <img class="modal-img" src="${d.imgFull || d.img}" alt="${d.name}" onerror="this.src='${d.img}'">
+      <div class="modal-img-gradient"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-header">
+        <div class="modal-period">${d.period} — ${d.years}</div>
+        <div class="modal-name">${d.name}</div>
+        <div class="modal-latin">${d.latin}</div>
+        <span class="diet-tag diet-${d.diet}" style="display:inline-block;margin-bottom:8px">${d.dietLabel}</span>
+      </div>
+      <div class="modal-stats-grid">
+        <div><span class="m-stat-label">Panjang</span><span class="m-stat-val">${d.length}</span></div>
+        <div><span class="m-stat-label">Berat</span><span class="m-stat-val">${d.weight}</span></div>
+        <div><span class="m-stat-label">Tinggi</span><span class="m-stat-val">${d.height}</span></div>
+        <div><span class="m-stat-label">Wilayah</span><span class="m-stat-val">${d.region}</span></div>
+      </div>
+      <div class="modal-section-title">Deskripsi Umum</div>
+      <div class="modal-section-text">${d.desc}</div>
+      <div class="modal-section-title">Anatomi & Fisik</div>
+      <div class="modal-section-text">${d.anatomy}</div>
+      <div class="modal-section-title">Perilaku & Pola Hidup</div>
+      <div class="modal-section-text">${d.behavior}</div>
+      <div class="modal-section-title">Habitat & Ekosistem</div>
+      <div class="modal-section-text">${d.habitat}</div>
+      <div class="modal-section-title">Fakta Ilmiah Menarik</div>
+      <div class="modal-fact-box">${d.fact}</div>
+      <div class="modal-tags">${d.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('')}</div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openPlantModal(i) {
+  const p = plants[i];
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-img-wrap">
+      <img class="modal-img" src="${p.img}" alt="${p.name}" style="filter:sepia(15%) saturate(1.1) hue-rotate(10deg)">
+      <div class="modal-img-gradient"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-header">
+        <div class="modal-period">${p.era}</div>
+        <div class="modal-name" style="color:#a0d060">${p.name}</div>
+        <div class="modal-latin">${p.latin}</div>
+        <span class="diet-tag diet-plant" style="display:inline-block;margin-bottom:8px">${p.livingFossil ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="3"/><path d="M12 5V2M12 22v-3M5 12H2M22 12h-3M7.05 7.05 4.93 4.93M19.07 19.07l-2.12-2.12M7.05 16.95l-2.12 2.12M19.07 4.93l-2.12 2.12" stroke="currentColor" stroke-width="2" fill="none"/></svg> Fosil Hidup' : 'Punah Sebagian'}</span>
+      </div>
+      <div class="modal-section-title" style="color:#7ab84a">Deskripsi</div>
+      <div class="modal-section-text">${p.desc}</div>
+      <div class="modal-section-title" style="color:#7ab84a">Detail Ilmiah</div>
+      <div class="modal-section-text">${p.detail}</div>
+      <div class="modal-section-title" style="color:#7ab84a">Peran Ekologis</div>
+      <div class="modal-fact-box" style="border-left-color:#7ab84a">${p.ecology}</div>
+      <div class="modal-tags">${p.category.map(c=>`<span class="modal-tag" style="border-color:rgba(74,110,42,0.4);color:#7ab84a">${c}</span>`).join('')}</div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) { if (e.target === document.getElementById('modal')) closeModalDirect(); }
+function closeModalDirect() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+// ========================
+// SCROLL & OBSERVERS
+// ========================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.08 });
+
+const tlObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); tlObserver.unobserve(e.target); }});
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// PROGRESS BAR
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progressBar').style.width = scrolled + '%';
+  
+  // Nav active
+  const navLinks = document.querySelectorAll('nav ul li a');
+  const sections = document.querySelectorAll('section[id]');
+  let current = 'hero';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#'+current); });
+});
+
+// COUNTER ANIMATION
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute('data-target'));
+  const duration = 2000;
+  const start = performance.now();
+  const update = (now) => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(update);
+}
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('[data-target]').forEach(animateCounter); counterObs.unobserve(e.target); }});
+});
+counterObs.observe(document.querySelector('.hero-stats'));
+
+// PARTICLES
+const particleContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const s = Math.random() * 3 + 1;
+  p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${12+Math.random()*15}s;animation-delay:${Math.random()*12}s;`;
+  particleContainer.appendChild(p);
+}
+
+// Parallax hero disabled
+
+// INIT
+renderDinos();
+renderPlants();
+renderTimeline();
+</script>
+</body>
+</html>
